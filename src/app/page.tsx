@@ -1,4 +1,5 @@
 import { BrandLogo } from "@/components/brand-logo";
+import { DealerShowcase } from "@/components/dealer-showcase";
 import { HeroBanner } from "@/components/hero-banner";
 import { ProductCard, type ProductCardProps } from "@/components/product-card";
 import { SiteFooter } from "@/components/site-footer";
@@ -480,6 +481,8 @@ export default function Home() {
       <section className="mx-auto w-full max-w-[1760px] px-4 py-5 sm:px-6 lg:px-8">
         <HeroBanner banners={heroBanners} />
       </section>
+
+      <DealerShowcase />
 
       <section className="mx-auto w-full max-w-[1760px] px-4 pb-12 sm:px-6 lg:px-8">
         <div className="space-y-12">
