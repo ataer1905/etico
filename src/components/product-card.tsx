@@ -45,11 +45,11 @@ function CartIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-[24px] w-[24px]"
+      className="h-[18px] w-[18px]"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.9"
+      strokeWidth="1.85"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -71,10 +71,10 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
   const isDiscounted = Boolean(oldPrice);
 
   return (
-    <article className="flex h-full min-h-[470px] flex-col overflow-hidden rounded-[6px] border border-[#e4e4e4] bg-[#fcfcfc] transition-colors duration-200 hover:border-[#3e5c76]">
-      <div className="relative flex h-[250px] items-center justify-center bg-[#f7f7f7] px-4 py-4">
+    <article className="flex h-full min-h-[452px] flex-col overflow-hidden rounded-xl border border-[#e8e8e8] bg-[#fcfcfc] shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-all duration-200 hover:border-[#cfd7df] hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
+      <div className="relative flex h-[238px] items-center justify-center border-b border-[#efefef] bg-[#f9f9f9] px-5 py-5">
         {discount && (
-          <span className="absolute right-4 top-4 flex h-[46px] w-[46px] items-center justify-center rounded-full border border-white/70 bg-[radial-gradient(circle_at_30%_25%,#7a97b3_0%,#587898_32%,#3e5c76_60%,#2f475d_100%)] text-[13px] font-extrabold text-white shadow-[0_8px_18px_rgba(62,92,118,0.4)]">
+          <span className="absolute left-4 top-4 rounded-full border border-[#d5dee6] bg-[#f1f5f8] px-2.5 py-1 text-[11px] font-semibold text-[#3e5c76]">
             %{discount}
           </span>
         )}
@@ -88,25 +88,25 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
         />
       </div>
 
-      <div className="flex flex-1 flex-col px-[18px] pb-[16px] pt-[14px]">
-        <div className="min-h-[106px]">
-          <p className="text-[18px] font-semibold leading-[1.18] tracking-[-0.01em] text-[#2b2b2b]">
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-3.5">
+        <div className="min-h-[98px]">
+          <p className="text-[15px] font-semibold leading-[1.2] tracking-[-0.01em] text-[#2f2f2f]">
             {brand}
           </p>
-          <p className="mt-1.5 text-[16px] font-normal leading-[1.34] tracking-[-0.01em] text-[#454545] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
+          <p className="mt-1 text-[14px] font-normal leading-[1.32] text-[#4f4f4f] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
             {productName}
           </p>
         </div>
 
-        <div className="mt-2 flex items-end justify-between gap-3 border-t border-[#ececec] pt-2.5">
+        <div className="mt-1.5 flex items-end justify-between gap-3 border-t border-[#ececec] pt-2.5">
           <div className="flex min-w-0 flex-col leading-tight">
             {oldPrice && (
-              <span className="mb-1 text-[14px] font-normal text-[#b8b8b8] line-through">
+              <span className="mb-1 text-[12px] font-normal text-[#b9b9b9] line-through">
                 {oldPrice}
               </span>
             )}
             <span
-              className={`text-[20px] font-bold tracking-[-0.01em] ${
+              className={`text-[23px] font-semibold tracking-[-0.02em] ${
                 isDiscounted ? "text-[#3e5c76]" : "text-[#4a4a4a]"
               }`}
             >
@@ -117,7 +117,7 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
           <button
             type="button"
             aria-label="Sepete ekle"
-            className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border-[2.5px] border-[#3e5c76] bg-white text-[#3e5c76] transition-colors duration-200 hover:border-[#2f4a61] hover:text-[#2f4a61]"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d2dbe3] bg-white text-[#3e5c76] transition-colors duration-200 hover:border-[#3e5c76] hover:bg-[#f5f8fb]"
           >
             <CartIcon />
           </button>
