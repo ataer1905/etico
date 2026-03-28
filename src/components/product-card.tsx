@@ -89,14 +89,16 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
       </div>
 
       <div className="flex flex-1 flex-col px-[18px] pb-[16px] pt-[14px]">
-        <div className="min-h-[116px]">
-          <p className="text-[16px] font-semibold leading-[1.2] text-[#2f2f2f]">{brand}</p>
-          <p className="mt-1 text-[14px] font-normal leading-[1.35] text-[#4a4a4a] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
+        <div className="min-h-[106px]">
+          <p className="text-[18px] font-semibold leading-[1.18] tracking-[-0.01em] text-[#2b2b2b]">
+            {brand}
+          </p>
+          <p className="mt-1.5 text-[16px] font-normal leading-[1.34] tracking-[-0.01em] text-[#454545] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
             {productName}
           </p>
         </div>
 
-        <div className="mt-auto flex items-end justify-between gap-3 border-t border-[#ececec] pt-3">
+        <div className="mt-2 flex items-end justify-between gap-3 border-t border-[#ececec] pt-2.5">
           <div className="flex min-w-0 flex-col leading-tight">
             {oldPrice && (
               <span className="mb-1 text-[14px] font-normal text-[#b8b8b8] line-through">
