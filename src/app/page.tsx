@@ -596,7 +596,7 @@ export default function Home() {
                 <div className="mt-4 flex items-center justify-between text-[14px]">
                   <a
                     href="#"
-                    className="font-medium text-[#ef7d22] underline underline-offset-2 transition-colors duration-200 hover:text-[#d46811]"
+                    className="font-medium text-[#3e5c76] underline underline-offset-2 transition-colors duration-200 hover:text-[#2f4a61]"
                   >
                     Devamini Oku
                   </a>

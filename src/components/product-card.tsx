@@ -45,17 +45,22 @@ function CartIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-5 w-5"
+      className="h-[24px] w-[24px]"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.9"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M3 5h2l1.4 8.1a2 2 0 0 0 2 1.67h7.9a2 2 0 0 0 2-1.55L20 7H7" />
-      <circle cx="10" cy="19" r="1.5" />
-      <circle cx="17" cy="19" r="1.5" />
+      <path d="M4.2 5.2h2.1l1.2 4.2h11.1l-1.7 5.8H8.8" />
+      <path d="M7.5 9.4h10.9" />
+      <path d="M8.6 11.7h8.8" />
+      <path d="M9.3 13.9h7.5" />
+      <path d="M11.7 9.4l-.55 5.3" />
+      <path d="M14.7 9.4l-.35 5.3" />
+      <circle cx="9.4" cy="18.3" r="1.15" />
+      <circle cx="15.2" cy="18.3" r="1.15" />
     </svg>
   );
 }
@@ -66,10 +71,10 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
   const isDiscounted = Boolean(oldPrice);
 
   return (
-    <article className="flex h-full min-h-[470px] flex-col overflow-hidden rounded-[6px] border border-[#e4e4e4] bg-[#fcfcfc] transition-colors duration-200 hover:border-[#f28a1d]">
+    <article className="flex h-full min-h-[470px] flex-col overflow-hidden rounded-[6px] border border-[#e4e4e4] bg-[#fcfcfc] transition-colors duration-200 hover:border-[#3e5c76]">
       <div className="relative flex h-[250px] items-center justify-center bg-[#f7f7f7] px-4 py-4">
         {discount && (
-          <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#f28a1d] text-[13px] font-bold text-white">
+          <span className="absolute right-4 top-4 flex h-[46px] w-[46px] items-center justify-center rounded-full border border-white/70 bg-[radial-gradient(circle_at_30%_25%,#7a97b3_0%,#587898_32%,#3e5c76_60%,#2f475d_100%)] text-[13px] font-extrabold text-white shadow-[0_8px_18px_rgba(62,92,118,0.4)]">
             %{discount}
           </span>
         )}
@@ -100,7 +105,7 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
             )}
             <span
               className={`text-[20px] font-bold tracking-[-0.01em] ${
-                isDiscounted ? "text-[#f28a1d]" : "text-[#4a4a4a]"
+                isDiscounted ? "text-[#3e5c76]" : "text-[#4a4a4a]"
               }`}
             >
               {price}
@@ -110,7 +115,7 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
           <button
             type="button"
             aria-label="Sepete ekle"
-            className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-[#f28a1d] text-white transition-colors duration-200 hover:bg-[#de7f1d]"
+            className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border-[2.5px] border-[#3e5c76] bg-white text-[#3e5c76] transition-colors duration-200 hover:border-[#2f4a61] hover:text-[#2f4a61]"
           >
             <CartIcon />
           </button>

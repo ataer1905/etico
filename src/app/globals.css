@@ -38,6 +38,7 @@ body {
     linear-gradient(180deg, #fbf8f2 0%, #f6f1e8 100%);
   color: var(--foreground);
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  zoom: 0.9;
 }
 
 a {
