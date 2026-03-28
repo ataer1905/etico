@@ -14,17 +14,44 @@ const utilityLinks = [
 const categories = [
   "VANALAR",
   "BORU EKLEME VE ASKILAMA",
-  "PVC",
-  "TEKNIK TESISAT",
   "YANGIN MALZEMELERI",
   "KOMPANSATORLER",
   "TANK ve POMPALAR",
-  "ARMATURLER",
-  "HIRDAVAT",
+  "PVC",
   "KAMPANYALAR",
 ];
 
 const heroBanners = ["/banners/trakya-dokum-banner.jpg", "/banners/duyarbanner.jpg"];
+
+const blogPosts = [
+  {
+    id: 1,
+    imageSrc: "/products/blog/blog-1.jpg",
+    imageAlt: "Blog gorseli 1",
+    title: "Hobi Urunleri Rehberi: Ahsap Isciliginden Kamp Malzemelerine, Iskarpeladan Rendeye Her Sey",
+    excerpt:
+      "Hobi urunleri, ahsap isciliginden kamp malzemelerine kadar uzanan genis bir alani kapsar. Bu rehberde urun secimi ve kullanim detaylarini bulabilirsiniz.",
+    date: "11.03.2026",
+  },
+  {
+    id: 2,
+    imageSrc: "/products/blog/blog-2.webp",
+    imageAlt: "Blog gorseli 2",
+    title: "Dekorasyon Rehberi: Dolap Ici Aksesuardan LED Aydinlatmaya, Hijyen Sistemlerinden Mutfaga",
+    excerpt:
+      "Dekorasyon urunleri bir evin hem islevselligini hem de yasam kalitesini belirleyen detaylardir. Rehberde dogru urun secimine odaklandik.",
+    date: "11.03.2026",
+  },
+  {
+    id: 3,
+    imageSrc: "/products/blog/blog-3.png",
+    imageAlt: "Blog gorseli 3",
+    title: "Hirdavat Malzemeleri Rehberi: Vidadan Silikona, Dubelden Sprey Boyaya Her Sey",
+    excerpt:
+      "Hirdavat malzemeleri proje kalitesini ve uygulama hizini dogrudan etkiler. Bu rehberde en kritik urun gruplarini ozetledik.",
+    date: "11.03.2026",
+  },
+] as const;
 
 type CatalogProduct = ProductCardProps & { id: number };
 
@@ -540,6 +567,44 @@ export default function Home() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-[1760px] px-4 pb-14 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {blogPosts.map((post) => (
+            <article key={post.id} className="flex h-full flex-col">
+              <a href="#" className="group block overflow-hidden rounded-[8px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={post.imageSrc}
+                  alt={post.imageAlt}
+                  className="h-[240px] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </a>
+              <div className="pt-4">
+                <h3 className="text-[21px] font-semibold leading-[1.18] tracking-[-0.01em] text-[#3f3f3f] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+                  {post.title}
+                </h3>
+                <p className="mt-3 text-[15px] leading-[1.45] text-[#606060] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
+                  {post.excerpt}
+                </p>
+                <div className="mt-4 flex items-center justify-between text-[30px] text-transparent" aria-hidden="true">
+                  <span>.</span>
+                  <span>.</span>
+                </div>
+                <div className="mt-4 flex items-center justify-between text-[14px]">
+                  <a
+                    href="#"
+                    className="font-medium text-[#ef7d22] underline underline-offset-2 transition-colors duration-200 hover:text-[#d46811]"
+                  >
+                    Devamini Oku
+                  </a>
+                  <span className="text-[#595959]">{post.date}</span>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 

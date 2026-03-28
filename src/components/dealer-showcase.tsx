@@ -32,7 +32,7 @@ export function DealerShowcase() {
               Guvenilir Is Ortaklari
             </p>
             <h2 className="mt-1 text-[26px] font-bold tracking-[-0.02em] text-[#1c1c1c] sm:text-[32px]">
-              Bayilerimiz
+              Markalar
             </h2>
           </div>
           <p className="hidden text-[13px] text-[#7d766d] md:block">
