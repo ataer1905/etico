@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { demoSession, type AdminRole, type AdminSession } from "@/lib/admin-data";
 
 type ToastTone = "success" | "error" | "info";
@@ -29,27 +36,69 @@ type AdminContextValue = {
 
 const STORAGE_KEY = "etico_admin_session";
 const THEME_KEY = "etico_admin_theme";
+const ADMIN_STORAGE_EVENT = "etico-admin-storage";
 
 const AdminContext = createContext<AdminContextValue | null>(null);
+let cachedSessionRaw: string | null = null;
+let cachedSessionSnapshot: AdminSession | null = null;
+
+function subscribeToAdminStore(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => undefined;
+
+  const handleChange = () => onStoreChange();
+
+  window.addEventListener("storage", handleChange);
+  window.addEventListener(ADMIN_STORAGE_EVENT, handleChange);
+
+  return () => {
+    window.removeEventListener("storage", handleChange);
+    window.removeEventListener(ADMIN_STORAGE_EVENT, handleChange);
+  };
+}
+
+function getSessionSnapshot(): AdminSession | null {
+  if (typeof window === "undefined") return null;
+  const savedSession = window.localStorage.getItem(STORAGE_KEY);
+
+  if (savedSession === cachedSessionRaw) {
+    return cachedSessionSnapshot;
+  }
+
+  cachedSessionRaw = savedSession;
+  cachedSessionSnapshot = savedSession
+    ? (JSON.parse(savedSession) as AdminSession)
+    : null;
+
+  return cachedSessionSnapshot;
+}
+
+function getThemeSnapshot(): "light" | "dark" {
+  if (typeof window === "undefined") return "light";
+  const savedTheme = window.localStorage.getItem(THEME_KEY) as "light" | "dark" | null;
+  return savedTheme ?? "light";
+}
 
 export function AdminProvider({ children }: { children: React.ReactNode }) {
-  const [session, setSession] = useState<AdminSession | null>(() => {
-    if (typeof window === "undefined") return null;
-    const savedSession = window.localStorage.getItem(STORAGE_KEY);
-    return savedSession ? (JSON.parse(savedSession) as AdminSession) : null;
-  });
-  const [theme, setThemeState] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") return "light";
-    const savedTheme = window.localStorage.getItem(THEME_KEY) as "light" | "dark" | null;
-    return savedTheme ?? "light";
-  });
+  const hydrated = useSyncExternalStore(
+    subscribeToAdminStore,
+    () => true,
+    () => false,
+  );
+  const session = useSyncExternalStore(
+    subscribeToAdminStore,
+    getSessionSnapshot,
+    () => null,
+  );
+  const theme = useSyncExternalStore(
+    subscribeToAdminStore,
+    getThemeSnapshot,
+    () => "light",
+  );
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [toasts, setToasts] = useState<ToastItem[]>([]);
-  const initialized = typeof window !== "undefined";
 
   useEffect(() => {
     document.documentElement.dataset.adminTheme = theme;
-    window.localStorage.setItem(THEME_KEY, theme);
   }, [theme]);
 
   const pushToast = (title: string, message: string, tone: ToastTone = "info") => {
@@ -63,7 +112,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<AdminContextValue>(
     () => ({
       session,
-      initialized,
+      initialized: hydrated,
       theme,
       sidebarCollapsed,
       toasts,
@@ -72,21 +121,28 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
           ...demoSession,
           role: role ?? demoSession.role,
         };
-        setSession(nextSession);
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(nextSession));
+        window.dispatchEvent(new Event(ADMIN_STORAGE_EVENT));
         pushToast("Oturum acildi", "Admin paneline hos geldiniz.", "success");
       },
       logout: () => {
-        setSession(null);
         window.localStorage.removeItem(STORAGE_KEY);
+        window.dispatchEvent(new Event(ADMIN_STORAGE_EVENT));
       },
-      setTheme: (nextTheme) => setThemeState(nextTheme),
-      toggleTheme: () => setThemeState((prev) => (prev === "light" ? "dark" : "light")),
+      setTheme: (nextTheme) => {
+        window.localStorage.setItem(THEME_KEY, nextTheme);
+        window.dispatchEvent(new Event(ADMIN_STORAGE_EVENT));
+      },
+      toggleTheme: () => {
+        const nextTheme = theme === "light" ? "dark" : "light";
+        window.localStorage.setItem(THEME_KEY, nextTheme);
+        window.dispatchEvent(new Event(ADMIN_STORAGE_EVENT));
+      },
       toggleSidebar: () => setSidebarCollapsed((prev) => !prev),
       pushToast,
       removeToast: (id) => setToasts((prev) => prev.filter((toast) => toast.id !== id)),
     }),
-    [initialized, session, sidebarCollapsed, theme, toasts],
+    [hydrated, session, sidebarCollapsed, theme, toasts],
   );
 
   return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>;

@@ -71,10 +71,10 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
   const isDiscounted = Boolean(oldPrice);
 
   return (
-    <article className="flex h-full min-h-[452px] flex-col overflow-hidden rounded-xl border border-[#e8e8e8] bg-[#fcfcfc] shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-all duration-200 hover:border-[#cfd7df] hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]">
-      <div className="relative flex h-[238px] items-center justify-center border-b border-[#efefef] bg-[#f9f9f9] px-5 py-5">
+    <article className="flex h-full min-h-[364px] flex-col overflow-hidden rounded-[10px] border border-[#e6e6e6] bg-[#fcfcfc] shadow-[0_1px_8px_rgba(0,0,0,0.035)] transition-all duration-200 hover:border-[#c8d2dc] hover:shadow-[0_8px_18px_rgba(0,0,0,0.065)]">
+      <div className="relative flex h-[170px] items-center justify-center border-b border-[#efefef] bg-[#fafafa] px-4 py-4 sm:h-[184px]">
         {discount && (
-          <span className="absolute left-4 top-4 rounded-full border border-[#d5dee6] bg-[#f1f5f8] px-2.5 py-1 text-[11px] font-semibold text-[#3e5c76]">
+          <span className="absolute left-3 top-3 rounded-full border border-[#d5dee6] bg-[#f1f5f8] px-2 py-0.5 text-[10px] font-semibold text-[#3e5c76]">
             %{discount}
           </span>
         )}
@@ -88,25 +88,25 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
         />
       </div>
 
-      <div className="flex flex-1 flex-col px-4 pb-4 pt-3.5">
-        <div className="min-h-[98px]">
-          <p className="text-[15px] font-semibold leading-[1.2] tracking-[-0.01em] text-[#2f2f2f]">
+      <div className="flex flex-1 flex-col px-4 pb-3.5 pt-3">
+        <div className="min-h-[78px]">
+          <p className="text-[14px] font-semibold leading-[1.15] tracking-[-0.01em] text-[#2f2f2f]">
             {brand}
           </p>
-          <p className="mt-1 text-[14px] font-normal leading-[1.32] text-[#4f4f4f] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
+          <p className="mt-1 text-[13px] font-normal leading-[1.3] text-[#4f4f4f] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] overflow-hidden">
             {productName}
           </p>
         </div>
 
-        <div className="mt-1.5 flex items-end justify-between gap-3 border-t border-[#ececec] pt-2.5">
+        <div className="mt-auto flex items-end justify-between gap-3 border-t border-[#ececec] pt-2">
           <div className="flex min-w-0 flex-col leading-tight">
             {oldPrice && (
-              <span className="mb-1 text-[12px] font-normal text-[#b9b9b9] line-through">
+              <span className="mb-0.5 text-[11px] font-normal text-[#b9b9b9] line-through">
                 {oldPrice}
               </span>
             )}
             <span
-              className={`text-[23px] font-semibold tracking-[-0.02em] ${
+              className={`text-[18px] font-semibold tracking-[-0.02em] sm:text-[19px] ${
                 isDiscounted ? "text-[#3e5c76]" : "text-[#4a4a4a]"
               }`}
             >
@@ -117,7 +117,7 @@ export function ProductCard({ title, imageSrc, imageAlt, oldPrice, price }: Prod
           <button
             type="button"
             aria-label="Sepete ekle"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d2dbe3] bg-white text-[#3e5c76] transition-colors duration-200 hover:border-[#3e5c76] hover:bg-[#f5f8fb]"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#d2dbe3] bg-white text-[#3e5c76] transition-colors duration-200 hover:border-[#3e5c76] hover:bg-[#f5f8fb]"
           >
             <CartIcon />
           </button>

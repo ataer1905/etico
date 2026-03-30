@@ -38,7 +38,7 @@ export function HeroBanner({ banners }: HeroBannerProps) {
   };
 
   return (
-    <article className="relative min-h-[360px] overflow-hidden rounded-none border border-[#e5ddd1] bg-[#d8ecf6] md:min-h-[470px]">
+    <article className="relative min-h-[270px] overflow-hidden rounded-[18px] border border-[#e5ddd1] bg-[#d8ecf6] md:min-h-[360px]">
       <div
         className="absolute inset-0 bg-center bg-no-repeat"
         style={{
@@ -55,7 +55,7 @@ export function HeroBanner({ banners }: HeroBannerProps) {
             type="button"
             aria-label="Onceki kampanya"
             onClick={goPrev}
-            className="absolute left-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#2b2b2b] shadow-sm transition hover:bg-white"
+            className="absolute left-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/92 text-[#2b2b2b] shadow-sm transition hover:bg-white"
           >
             <ArrowIcon left />
           </button>
@@ -63,14 +63,14 @@ export function HeroBanner({ banners }: HeroBannerProps) {
             type="button"
             aria-label="Sonraki kampanya"
             onClick={goNext}
-            className="absolute right-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/90 text-[#2b2b2b] shadow-sm transition hover:bg-white"
+            className="absolute right-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-black/10 bg-white/92 text-[#2b2b2b] shadow-sm transition hover:bg-white"
           >
             <ArrowIcon />
           </button>
         </>
       ) : null}
 
-      <span className="absolute bottom-3 right-4 z-20 rounded-md bg-black/45 px-2 py-1 text-sm font-semibold text-white">
+      <span className="absolute bottom-3 right-3 z-20 rounded-md bg-black/45 px-2 py-1 text-[12px] font-semibold text-white">
         {activeIndex + 1} / {total || 1}
       </span>
     </article>

@@ -1,22 +1,6 @@
-const tonsepetiLinks = [
-  "Hakkimizda",
-  "Sik Sorulan Sorular",
-  "Odeme ve Teslimat",
-  "Havale/EFT Bilgileri",
-  "Iletisim",
-];
+"use client";
 
-const guvenlikLinks = [
-  "Cerez (Cookie) Politikasi",
-  "Uyelik Iptal Talebi",
-  "Mesafeli Satis Sozlesmesi",
-  "Uyelik Sozlesmesi",
-  "Garanti Iade ve Iptal",
-  "KVK Politikasi",
-  "KVKK Kapsaminda Aydinlatma Metni",
-  "On Bilgilendirme Formu",
-  "Gizlilik ve Guvenlik Politikasi",
-];
+import { useHomepageContent } from "@/lib/site-content";
 
 function SocialBox({ label }: { label: string }) {
   return (
@@ -27,14 +11,22 @@ function SocialBox({ label }: { label: string }) {
 }
 
 export function SiteFooter() {
+  const { footer } = useHomepageContent();
+  const accentLabel = "Cagdasisi Dijital Ticaret Altyapisi";
+  const [beforeAccent, afterAccent = ""] = footer.bottomBandText.split(accentLabel);
+
   return (
     <footer className="mt-14">
       <div className="bg-[linear-gradient(180deg,#2f3764_0%,#262d4f_55%,#171b2f_100%)] text-white">
         <div className="mx-auto w-full max-w-[1760px] px-4 pt-9 sm:px-6 lg:px-8">
           <div className="grid gap-x-12 gap-y-8 pb-8 lg:grid-cols-[280px_300px_1fr_360px]">
             <section>
-              <h3 className="text-[17px] font-bold leading-[1.2] text-[#ff9aa5]">Musteri Hizmetleri</h3>
-              <p className="mt-2 text-[15px] font-semibold leading-none">☎ 0322 334 19 66</p>
+              <h3 className="text-[17px] font-bold leading-[1.2] text-[#ff9aa5]">
+                {footer.supportTitle}
+              </h3>
+              <p className="mt-2 text-[15px] font-semibold leading-none">
+                ☎ {footer.phone}
+              </p>
 
               <div className="mt-8">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -49,9 +41,11 @@ export function SiteFooter() {
             </section>
 
             <section>
-              <h3 className="border-b border-white/10 pb-3 text-[19px] font-bold leading-none">Cagdasisi.com</h3>
+              <h3 className="border-b border-white/10 pb-3 text-[19px] font-bold leading-none">
+                {footer.companyTitle}
+              </h3>
               <ul className="mt-4 space-y-2.5 text-[15px] leading-[1.22]">
-                {tonsepetiLinks.map((item) => (
+                {footer.companyLinks.map((item) => (
                   <li key={item}>
                     <a href="#" className="transition-opacity duration-200 hover:opacity-85">
                       {item}
@@ -62,9 +56,11 @@ export function SiteFooter() {
             </section>
 
             <section>
-              <h3 className="border-b border-white/10 pb-3 text-[19px] font-bold leading-none">Guvenlik</h3>
+              <h3 className="border-b border-white/10 pb-3 text-[19px] font-bold leading-none">
+                {footer.securityTitle}
+              </h3>
               <ul className="mt-4 space-y-2.5 text-[15px] leading-[1.22]">
-                {guvenlikLinks.map((item) => (
+                {footer.securityLinks.map((item) => (
                   <li key={item}>
                     <a href="#" className="transition-opacity duration-200 hover:opacity-85">
                       {item}
@@ -75,7 +71,7 @@ export function SiteFooter() {
             </section>
 
             <section>
-              <h3 className="text-[19px] font-bold leading-none">Takip Edin</h3>
+              <h3 className="text-[19px] font-bold leading-none">{footer.socialTitle}</h3>
 
               <div className="mt-8 flex items-center gap-3">
                 <SocialBox label="f" />
@@ -86,12 +82,12 @@ export function SiteFooter() {
 
               <form className="mt-5 flex h-[44px] w-full overflow-hidden">
                 <label htmlFor="subscribe-mail" className="sr-only">
-                  E-Mail Adresiniz
+                  {footer.newsletterPlaceholder}
                 </label>
                 <input
                   id="subscribe-mail"
                   type="email"
-                  placeholder="E-Mail Adresiniz"
+                  placeholder={footer.newsletterPlaceholder}
                   className="h-full flex-1 bg-[#f5f1ea] px-4 text-[15px] text-[#6e7892] outline-none placeholder:text-[#7b8396]"
                 />
                 <button
@@ -102,14 +98,12 @@ export function SiteFooter() {
                 </button>
               </form>
 
-              <p className="mt-3 text-[14px] leading-[1.25]">
-                Kampanyalari ve indirimlerinizi sizinle paylasalim mi?
-              </p>
+              <p className="mt-3 text-[14px] leading-[1.25]">{footer.newsletterText}</p>
             </section>
           </div>
 
           <div className="flex flex-col gap-4 border-t border-white/10 py-5 lg:flex-row lg:items-center lg:justify-between">
-            <p className="text-[15px] leading-none">Copyright (c) cagdasisi.com</p>
+            <p className="text-[15px] leading-none">{footer.copyright}</p>
 
             <div className="rounded-[10px] bg-white px-4 py-2.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -126,8 +120,15 @@ export function SiteFooter() {
       </div>
 
       <div className="bg-[linear-gradient(180deg,#666ea4_0%,#5a6296_100%)] py-4 text-center text-[15px] text-white">
-        Bu yapi, <span className="font-semibold text-[#7ee5ff]">Cagdasisi Dijital Ticaret Altyapisi</span>{" "}
-        ile guvenli ve hizli satin alma deneyimi sunmak icin hazirlanmistir.
+        {afterAccent ? (
+          <>
+            {beforeAccent}
+            <span className="font-semibold text-[#7ee5ff]">{accentLabel}</span>
+            {afterAccent}
+          </>
+        ) : (
+          footer.bottomBandText
+        )}
       </div>
     </footer>
   );

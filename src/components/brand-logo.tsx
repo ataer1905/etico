@@ -15,7 +15,7 @@ export function BrandLogo({ alt, src }: BrandLogoProps) {
           fetchPriority="high"
           decoding="async"
           draggable={false}
-          className="block h-[72px] w-auto object-contain sm:h-[80px] lg:h-[88px]"
+          className="block h-[60px] w-auto object-contain sm:h-[66px] lg:h-[72px]"
         />
       </div>
     </div>
