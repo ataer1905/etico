@@ -84,12 +84,12 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     () => true,
     () => false,
   );
-  const session = useSyncExternalStore(
+  const session: AdminSession | null = useSyncExternalStore(
     subscribeToAdminStore,
     getSessionSnapshot,
     () => null,
   );
-  const theme = useSyncExternalStore(
+  const theme: "light" | "dark" = useSyncExternalStore(
     subscribeToAdminStore,
     getThemeSnapshot,
     () => "light",
