@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { roleLabels, type AdminRole } from "@/lib/admin-data";
 import { useAdminContext } from "@/components/admin/admin-context";
@@ -10,7 +10,6 @@ const roles: AdminRole[] = ["super_admin", "manager", "editor", "order_manager"]
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const params = useSearchParams();
   const { login } = useAdminContext();
   const [selectedRole, setSelectedRole] = useState<AdminRole>("super_admin");
   const [email, setEmail] = useState("admin@etico.local");
@@ -90,7 +89,11 @@ export default function AdminLoginPage() {
             type="button"
             onClick={() => {
               login(selectedRole);
-              router.push(params.get("next") || "/admin");
+              const nextPath =
+                typeof window !== "undefined"
+                  ? new URLSearchParams(window.location.search).get("next")
+                  : null;
+              router.push(nextPath || "/admin");
             }}
             className="mt-8 w-full rounded-[22px] bg-[var(--admin-accent)] px-5 py-4 text-[15px] font-semibold text-white shadow-[0_20px_40px_rgba(62,92,118,0.18)]"
           >
@@ -108,4 +111,3 @@ export default function AdminLoginPage() {
     </main>
   );
 }
-
