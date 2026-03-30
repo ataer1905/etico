@@ -152,6 +152,27 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 </div>
               </div>
             </div>
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-1 lg:hidden">
+              {navItems
+                .filter((item) => allowedMenus.includes(item.key))
+                .map((item) => {
+                  const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                  return (
+                    <Link
+                      key={item.key}
+                      href={item.href}
+                      className={`inline-flex shrink-0 items-center gap-2 rounded-2xl px-3 py-2 text-[13px] font-semibold transition ${
+                        active
+                          ? "bg-[var(--admin-accent)] text-white"
+                          : "border border-[var(--admin-line)] bg-[var(--admin-panel)] text-[var(--admin-muted)]"
+                      }`}
+                    >
+                      <span className="shrink-0">{item.icon}</span>
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+            </div>
           </header>
 
           <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
@@ -162,7 +183,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="pointer-events-auto rounded-[20px] border border-[var(--admin-line)] bg-[var(--admin-panel)] p-4 shadow-[0_16px_40px_rgba(15,23,42,0.14)]"
+            className={`pointer-events-auto rounded-[20px] border bg-[var(--admin-panel)] p-4 shadow-[0_16px_40px_rgba(15,23,42,0.14)] ${
+              toast.tone === "success"
+                ? "border-emerald-100"
+                : toast.tone === "error"
+                  ? "border-rose-100"
+                  : "border-[var(--admin-line)]"
+            }`}
           >
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -288,4 +315,3 @@ function MenuFoldIcon() {
     </>,
   );
 }
-
